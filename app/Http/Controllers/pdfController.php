@@ -23,7 +23,7 @@ class pdfController extends Controller
             'name' => 'Qutbuddin Khan'
         ];
 
-        $html = view('pdf.invoice', $data)->render();
+        $html = view('pdf.invoice', $data)->render(); 
 
         $mpdf = new Mpdf([
             'allow_remote' => true,
