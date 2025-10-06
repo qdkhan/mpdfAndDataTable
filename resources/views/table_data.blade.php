@@ -40,6 +40,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="text/javascript">
         $(function() {
@@ -86,6 +87,27 @@
                     }
                 ]
             });
+
+            Swal.fire({
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            
+
+            // Swal.fire({
+            //     title: "Your work has been saved",
+            //     icon: "success",
+            //     showCloseButton: false,
+            //     showCancelButton: false,
+            //     focusConfirm: false,
+            //     confirmButtonText: `
+            //         <i class="fa fa-thumbs-up"></i> Great!
+            //     `,
+            //     confirmButtonAriaLabel: "Thumbs up, great!",
+            //     timer: 1500
+            // });
         });
     </script>
 
