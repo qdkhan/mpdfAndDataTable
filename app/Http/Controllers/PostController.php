@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PostPublished;
+use App\Interfaces\PostRepositoryInterface;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -10,9 +12,15 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct(public PostRepositoryInterface $postRepository) {
+
+    }
+
     public function index()
     {
-        //
+        $result = $this->postRepository->getAll();
+        return $result;
     }
 
     /**
@@ -28,7 +36,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request->all();
+        $data = $request->all();
+        // dd($this->postRepository);
+        $result = $this->postRepository->create($data);
+        if($result) PostPublished::dispatch($result);
+        
+        return $result;
     }
 
     /**
@@ -36,7 +50,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        
     }
 
     /**
@@ -61,5 +75,9 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    public function showForm() {
+        return view('register_form');
     }
 }

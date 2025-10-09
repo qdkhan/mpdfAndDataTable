@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Interfaces\MessageSender;
+use App\Models\Post;
+use App\Observers\PostObserver;
 use App\Services\EmailService;
 use App\Services\SMSService;
 use Illuminate\Support\ServiceProvider;
@@ -20,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
         // app()->bind(MessageSender::class,  ($app) => collect(['email' => app(EmailService::class), 'sms' => app(SMSService::class)]) );
 
         app()->bind(MessageSender::class, fn($app) =>  collect([
-                'sms' => app(SMSService::class),
+                'sms'   => app(SMSService::class),
                 'email' => app(EmailService::class)
             ])
         );
@@ -31,6 +33,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Post::observe(PostObserver::class);
     }
 }

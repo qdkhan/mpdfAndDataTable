@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\pdfController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\isUserIsAdmin;
 use Illuminate\Support\Facades\Route;
@@ -14,6 +15,11 @@ Route::get('pdf-download', [pdfController::class, 'generatePDF'])->name('pdf-dow
 Route::get('user-data', [pdfController::class, 'tableData'])->name('users.data');
 Route::get('/users', [pdfController::class, 'index'])->name('users.index')->middleware(isUserIsAdmin::class.':editor');
 Route::get('userIndex', [UserController::class, 'index']);
+
+Route::post('post', [PostController::class, 'store']);
+Route::get('all-post', [PostController::class, 'index']);
+Route::get('showForm', [PostController::class, 'showForm']);
+
 
 // Route::middleware([isUserIsAdmin::class])->group(function () {
 //     Route::get('pdf-download', [pdfController::class, 'generatePDF'])->name('pdf-download');
